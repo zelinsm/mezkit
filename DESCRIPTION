@@ -1,0 +1,10 @@
+Package: mezkit
+Title: A Tiny Personal Toolkit for Flexible Model Comparison
+Version: 0.0.1
+Authors@R: person("Megan", "Zelinsky", email = "meganezelinsky@gmail.com", role = c("aut", "cre"))
+Description: Tools for flexible model specification and performance comparison. Built for transparent reporting and comparison of models.
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+

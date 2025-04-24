@@ -1,0 +1,2 @@
+devtools::document()  # Rebuild the help files
+devtools::install()   # Reinstall mezkit with your new changes

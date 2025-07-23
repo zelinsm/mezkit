@@ -66,7 +66,7 @@ nancydrew <- function(data) {
     print(date_summary |>
             gt::gt() |>
             gt::tab_header(title = "📅 Date Variables Summary"))
-  } else {
+  # } else {
     message("ℹ️ No date variables found.")
   }
 

@@ -1,3 +1,14 @@
+#' ds: Descriptive statistics table
+#'
+#' Creates a table with neat descriptive statistics.
+#'
+#' @param data A data frame containing numeric variables.
+#' @param decimals Optional decimals to return. If `NULL` (default), 2 decimals are used.
+#' @param labels Optional labels for each variable.
+#' @return A tibble with columns: `var`, `N`, `Mean ± SD`, `Median ± MAD`, and `IQR`.
+
+#'
+#' @export
 library(rlang)
 library(dplyr)
 library(tidyr)

@@ -6,13 +6,7 @@
 #' @param decimals Optional decimals to return. If `NULL` (default), 2 decimals are used.
 #' @param labels Optional labels for each variable.
 #' @return A tibble with columns: `var`, `N`, `Mean ± SD`, `Median ± MAD`, and `IQR`.
-
-#'
 #' @export
-library(rlang)
-library(dplyr)
-library(tidyr)
-
 ds <- function(data, decimals = 2, labels = NULL) {
 
   out <- data |>

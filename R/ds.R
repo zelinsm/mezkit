@@ -1,15 +1,45 @@
 #' ds: Descriptive statistics table
 #'
-#' Creates a table with neat descriptive statistics.
+#' Creates a tidy table of descriptive statistics for all numeric variables
+#' in a data frame. Non-numeric variables are automatically ignored.
 #'
-#' @param data A data frame containing numeric variables.
-#' @param decimals Optional decimals to return. If `NULL` (default), 2 decimals are used.
-#' @param labels Optional labels for each variable.
-#' @return A tibble with columns: `var`, `N`, `Mean ± SD`, `Median ± MAD`, and `IQR`.
+#' @param data A data frame. All numeric variables will be summarized.
+#' @param decimals Number of decimal places to round summary statistics.
+#'   Defaults to 2.
+#' @param labels Optional named character vector mapping variable names
+#'   to human-readable labels.
+#'
+#' @return A tibble with one row per variable and columns:
+#'   `var`, `N`, `Mean ± SD`, `Median ± MAD`, and `IQR`.
+#'
+#' @examples
+#' df <- data.frame(
+#'   age = c(34, 29, 42, NA),
+#'   score = c(88.2, 91.5, 79.3, 85.0),
+#'   group = c("A", "A", "B", "B")
+#' )
+#'
+#' ds(df)
+#'
+#' ds(df, decimals = 1)
+#'
+#' ds(
+#'   df,
+#'   labels = c(
+#'     age = "Participant age",
+#'     score = "Test score"
+#'   )
+#' )
+#'
 #' @export
 ds <- function(data, decimals = 2, labels = NULL) {
 
-  out <- data |>
+  num_vars <- dplyr::select(data, where(is.numeric))
+  if (ncol(num_vars) == 0) {
+    stop("ds(): no numeric variables detected in `data`")
+  }
+
+  out <- num_vars |>
     summarise(
       across(
         everything(),
@@ -53,8 +83,8 @@ ds <- function(data, decimals = 2, labels = NULL) {
 
   if (!is.null(labels)) {
     label_df <- tibble(
-      var = names(labels),
-      label    = unname(as.character(labels))
+      var   = names(labels),
+      label = unname(as.character(labels))
     )
 
     out <- out |>

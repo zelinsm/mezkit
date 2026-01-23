@@ -7,15 +7,39 @@
 ds(data, decimals = 2, labels = NULL)
 }
 \arguments{
-\item{data}{A data frame containing numeric variables.}
+\item{data}{A data frame. All numeric variables will be summarized.}
 
-\item{decimals}{Optional decimals to return. If \code{NULL} (default), 2 decimals are used.}
+\item{decimals}{Number of decimal places to round summary statistics.
+Defaults to 2.}
 
-\item{labels}{Optional labels for each variable.}
+\item{labels}{Optional named character vector mapping variable names
+to human-readable labels.}
 }
 \value{
-A tibble with columns: \code{var}, \code{N}, \verb{Mean ± SD}, \verb{Median ± MAD}, and \code{IQR}.
+A tibble with one row per variable and columns:
+\code{var}, \code{N}, \verb{Mean ± SD}, \verb{Median ± MAD}, and \code{IQR}.
 }
 \description{
-Creates a table with neat descriptive statistics.
+Creates a tidy table of descriptive statistics for all numeric variables
+in a data frame. Non-numeric variables are automatically ignored.
+}
+\examples{
+df <- data.frame(
+  age = c(34, 29, 42, NA),
+  score = c(88.2, 91.5, 79.3, 85.0),
+  group = c("A", "A", "B", "B")
+)
+
+ds(df)
+
+ds(df, decimals = 1)
+
+ds(
+  df,
+  labels = c(
+    age = "Participant age",
+    score = "Test score"
+  )
+)
+
 }
